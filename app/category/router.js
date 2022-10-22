@@ -1,9 +1,12 @@
-var express = require("express");
+var express = require('express');
+const { index, create, store, edit, update, destroy } = require('./controller');
 var router = express.Router();
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
+router.get('/category', index);
+router.get('/category/create', create);
+router.post('/category/create', store);
+router.get('/category/:id/edit', edit);
+router.put('/category/:id', update);
+router.delete('/category/:id', destroy);
 
 module.exports = router;

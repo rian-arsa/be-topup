@@ -1,0 +1,71 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama Game</th>
+      <th>Item</th>
+      <th>Total harga</th>
+      <th>Status</th>
+      <th>Nama player</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for( let i = 0; i < transactions.length; i++ ) { %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <img
+              src="http://localhost:3000/uploads/<%= transactions[i].historyVoucherTopup.thumbnail %>"
+              alt="thumbnail"
+              width="48px"
+              height="48px"
+            />
+          </li>
+        </ul>
+        <%= transactions[i].historyVoucherTopup.gameName %> <br />
+        <%= transactions[i].historyVoucherTopup.category %>
+      </td>
+      <td>
+        <%= transactions[i].historyVoucherTopup.coinQuantity %> <%=
+        transactions[i].historyVoucherTopup.coinName %>
+      </td>
+      <td>Rp <%= transactions[i].value %></td>
+      <td>
+        <% if (transactions[i].status === 'success') { %>
+        <span class="badge badge-success">Success</span>
+        <% } else if(transactions[i].status === 'failed') { %>
+        <span class="badge badge-danger">Gagal</span>
+        <% } else { %>
+        <span class="badge badge-warning">Pending</span>
+        <% } %>
+      </td>
+      <td><%= transactions[i].player?.name ?? '-' %></td>
+      <td>
+        <form
+          method="post"
+          action="/transaction/<%= transactions[i]._id %>?method=PUT"
+          style="display: inline-block"
+        >
+          <input type="hidden" name="status" value="success" />
+          <button class="btn btn-info btn-sm">
+            <i class="fas fa-check"> Terima </i>
+          </button>
+        </form>
+        <form
+          method="post"
+          action="/transaction/<%= transactions[i]._id %>?method=PUT"
+          style="display: inline-block"
+        >
+          <input type="hidden" name="status" value="failed" />
+          <button class="btn btn-danger btn-sm">
+            <i class="fas fa-times-circle"> Tolak </i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>

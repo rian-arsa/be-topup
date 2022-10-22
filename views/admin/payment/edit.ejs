@@ -1,0 +1,90 @@
+<%- include ../../partials/header.ejs %> <%- include ../../partials/navbar.ejs
+%> <%- include ../../partials/sidebar.ejs %>
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Payment</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/payment">Payment</a></li>
+            <li class="breadcrumb-item active">Edit</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <!-- /.card -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Form Edit Payment</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form 
+            method="post"
+            action="/payment/<%= payment._id %>?method=PUT">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="type">Type pembayaran</label>
+                  <select
+                    class="form-control select2"
+                    id="type"
+                    name="type"
+                    required
+                  >
+                    <option value="Cash" <% if (payment.type === 'Cash') { %>selected="selected"<% } %>>Cash</option>
+                    <option value="Kredit" <% if (payment.type === 'Kredit') { %>selected="selected"<% } %>>Kredit</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="banks">Bank</label>
+                  <div class="select2-purple">
+                    <select
+                      class="form-control select2"
+                      id="banks"
+                      name="banks"
+                      multiple="multiple"
+                      data-placeholder="Masukkan Bank"
+                      required
+                    >
+                      <% banks.forEach(data => { %>
+                      <option value="<%= data._id %>" <% payment.banks.forEach(element => { %><% if (data._id.toString() === element._id.toString()) { %>selected<% } %><% }) %>> 
+                        <%= data.name %> - <%= data.nameBank %> - <%=
+                        data.noRekening%>
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<%- include ../../partials/footer.ejs %> <%- include ../../partials/js.ejs %>
