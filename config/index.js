@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
@@ -8,4 +9,6 @@ module.exports = {
     mongoUrl: process.env.MONGO_URL,
     mongoUser: process.env.MONGO_USER,
     mongoPassword: process.env.MONGO_PASSWORD,
+
+    rootPath: path.resolve(__dirname, '..'),
 };

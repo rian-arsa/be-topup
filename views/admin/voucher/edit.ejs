@@ -37,7 +37,7 @@
             <!-- form start -->
             <form
               method="post"
-              action="/voucher/<%= voucher._id %>?method=PUT"
+              action="/voucher/<%= voucher._id %>?_method=PUT"
               enctype="multipart/form-data"
             >
               <div class="card-body">
@@ -105,7 +105,7 @@
                     name="thumbnail"
                   />
                   <img
-                    src="http://127.0.0.1:3000/uploads/<%= voucher.thumbnail %> "
+                    src="http://localhost:5000/uploads/<%= voucher.thumbnail %> "
                     alt=""
                     id="preview"
                     class="card"
