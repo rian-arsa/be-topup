@@ -1,84 +1,101 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-let transactionSchema = mongoose.Schema(
-  {
-    historyVoucherTopup: {
-      gameName: { type: String, required: [true, "Nama game harus diisi"] },
-      category: { type: String, required: [true, "Kategori harus diisi"] },
-      thumbnail: { type: String },
-      coinName: { type: String, required: [true, "Nama koin harus diisi"] },
-      coinQuantity: {
-        type: String,
-        required: [true, "Jumlah koin harus diisi"],
-      },
-      price: { type: Number },
-    },
+const { Schema, model } = mongoose;
 
-    historyPayment: {
-      name: { type: String, required: [true, "Nama harus diisi"] },
-      type: { type: String, required: [true, "Tipe pembayaran harus diisi"] },
-      bankName: { type: String, required: [true, "Nama bank harus diisi"] },
-      noRekening: {
-        type: String,
-        required: [true, "Nomor rekening harus diisi"],
-      },
-    },
+let transactionSchema = new Schema(
+    {
+        historyVoucherTopup: {
+            gameName: {
+                type: String,
+                required: [true, 'Nama game harus diisi'],
+            },
+            category: {
+                type: String,
+                required: [true, 'Kategori harus diisi'],
+            },
+            thumbnail: { type: String },
+            coinName: {
+                type: String,
+                required: [true, 'Nama koin harus diisi'],
+            },
+            coinQuantity: {
+                type: String,
+                required: [true, 'Jumlah koin harus diisi'],
+            },
+            price: { type: Number },
+        },
 
-    name: {
-      type: String,
-      required: [true, "Nama harus diisi"],
-      maxlength: [225, "Nama harus antara 3 -225 karakter"],
-      minlength: [3, "Nama harus antara 3 -225 karakter"],
-    },
+        historyPayment: {
+            name: { type: String, required: [true, 'Nama harus diisi'] },
+            type: {
+                type: String,
+                required: [true, 'Tipe pembayaran harus diisi'],
+            },
+            bankName: {
+                type: String,
+                required: [true, 'Nama bank harus diisi'],
+            },
+            noRekening: {
+                type: String,
+                required: [true, 'Nomor rekening harus diisi'],
+            },
+        },
 
-    accountUser: {
-      type: String,
-      required: [true, "Nama harus diisi"],
-      maxlength: [225, "Nama harus antara 3 -225 karakter"],
-      minlength: [3, "Nama harus antara 3 -225 karakter"],
-    },
+        name: {
+            type: String,
+            required: [true, 'Nama harus diisi'],
+            maxlength: [225, 'Nama harus antara 3 -225 karakter'],
+            minlength: [3, 'Nama harus antara 3 -225 karakter'],
+        },
 
-    tax: {
-      type: Number,
-      default: 0,
-    },
+        accountUser: {
+            type: String,
+            required: [true, 'Nama harus diisi'],
+            maxlength: [225, 'Nama harus antara 3 -225 karakter'],
+            minlength: [3, 'Nama harus antara 3 -225 karakter'],
+        },
 
-    value: {
-      type: Number,
-      default: 0,
-    },
+        tax: {
+            type: Number,
+            default: 0,
+        },
 
-    status: {
-      type: String,
-      enum: ["pending", "success", "failed"],
-      default: "pending",
-    },
+        value: {
+            type: Number,
+            default: 0,
+        },
 
-    player: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Player",
-    },
-    historyUser: {
-      name: { type: String, required: [true, "Nama pemain harus diisi"] },
-      phoneNumber: {
-        type: String,
-        required: [true, "Nomor telepon harus diisi"],
-        maxlength: [13, "Nama harus antara 9 - 13 karakter"],
-        minlength: [9, "Nama harus antara 9 - 13 karakter"],
-      },
-    },
+        status: {
+            type: String,
+            enum: ['pending', 'success', 'failed'],
+            default: 'pending',
+        },
 
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Player",
-    },
+        player: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Player',
+        },
+        historyUser: {
+            name: { type: String, required: [true, 'Nama pemain harus diisi'] },
+            phoneNumber: {
+                type: String,
+                required: [true, 'Nomor telepon harus diisi'],
+                maxlength: [13, 'Nama harus antara 9 - 13 karakter'],
+                minlength: [9, 'Nama harus antara 9 - 13 karakter'],
+            },
+        },
 
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Player',
+        },
+
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
     },
-  },
-  { timestampt: true }
+    { timestampt: true },
 );
 
-module.exports = mongoose.model("Transaction", transactionSchema);
+module.exports = model('Transaction', transactionSchema);
