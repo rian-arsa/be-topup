@@ -5,6 +5,9 @@ const os = require('os');
 
 const router = express.Router();
 
+const { verifyUser } = require('../../middleware/Auth');
+
+router.use(verifyUser);
 router.get('/voucher', index);
 router.get('/voucher/create', create);
 router.post(

@@ -2,21 +2,24 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
-const nominalSchema = new Schema({
-    coinQuantity: {
-        type: Number,
-        required: [true, 'Coin quantity is required'],
-        default: 0,
+const nominalSchema = new Schema(
+    {
+        coinQuantity: {
+            type: Number,
+            required: [true, 'Coin quantity is required'],
+            default: 0,
+        },
+        coinName: {
+            type: String,
+            required: [true, 'Coin name is required'],
+        },
+        price: {
+            type: Number,
+            required: [true, 'Price is required'],
+            default: 0,
+        },
     },
-    coinName: {
-        type: String,
-        required: [true, 'Coin name is required'],
-    },
-    price: {
-        type: Number,
-        required: [true, 'Price is required'],
-        default: 0,
-    },
-});
+    { timestamps: true },
+);
 
 module.exports = model('Nominal', nominalSchema);

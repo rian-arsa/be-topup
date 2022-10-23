@@ -2,6 +2,9 @@ var express = require('express');
 const { index, create, store, edit, update, destroy } = require('./controller');
 var router = express.Router();
 
+const { verifyUser } = require('../../middleware/Auth');
+
+router.use(verifyUser);
 router.get('/category', index);
 router.get('/category/create', create);
 router.post('/category/create', store);

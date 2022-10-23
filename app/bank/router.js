@@ -3,6 +3,9 @@ const { index, create, store, edit, update, destroy } = require('./controller');
 
 const router = express.Router();
 
+const { verifyUser } = require('../../middleware/Auth');
+
+router.use(verifyUser);
 router.get('/bank', index);
 router.get('/bank/create', create);
 router.post('/bank/create', store);
