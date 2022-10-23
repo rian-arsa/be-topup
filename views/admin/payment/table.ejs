@@ -1,68 +1,68 @@
 <table id="example2" class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Np</th>
-      <th>Jenis pembayaran</th>
-      <th>Status</th>
-      <th>Bank</th>
-      <th>Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% for( let index = 0; index < payments.length; index++ ) { %>
-    <tr>
-      <td><%= index + 1 %></td>
-      <td><%= payments[index].type %></td>
-      <td>
-        <% if (payments[index].status === 'Y') { %>
-        <span class="badge badge-success">Lunas</span>
-        <% } else { %>
-        <span class="badge badge-danger">Belum Lunas</span>
+    <thead>
+        <tr>
+            <th>Np</th>
+            <th>Jenis pembayaran</th>
+            <th>Status</th>
+            <th>Bank</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let index = 0; index < payments.length; index++ ) { %>
+        <tr>
+            <td><%= index + 1 %></td>
+            <td><%= payments[index].type %></td>
+            <td>
+                <% if (payments[index].status === 'Y') { %>
+                <span class="badge badge-success">Lunas</span>
+                <% } else { %>
+                <span class="badge badge-danger">Belum Lunas</span>
+                <% } %>
+            </td>
+            <td>
+                <% payments[index].banks.forEach(element => { %>
+                <span class="badge badge-warning"
+                    ><%= element.name %> - <%= element.bankName %> - <%=
+                    element.noRekening%></span
+                >
+                <% }) %>
+            </td>
+            <td>
+                <form
+                    method="post"
+                    action="/payment/<%= payments[index]._id %>?_method=PUT"
+                    style="display: inline-block"
+                >
+                    <input
+                        type="hidden"
+                        name="status"
+                        value="<% if (payments[index].status === 'Y') { %>N<% } else{ %>Y<% } %>"
+                    />
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-folder">
+                            <% if (payments[index].status === 'Y') { %> Belum
+                            Lunas <% } else { %> Lunas <% } %>
+                        </i>
+                    </button>
+                </form>
+                <form
+                    style="display: inline-block"
+                    method="post"
+                    action="/payment/<%= payments[index]._id %>?_method=DELETE"
+                >
+                    <a
+                        href="/payment/<%= payments[index]._id %>/edit"
+                        class="btn btn-info btn-sm"
+                    >
+                        <i class="fas fa-pencil-alt"> Edit</i>
+                    </a>
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"> Hapus</i>
+                    </button>
+                </form>
+            </td>
+        </tr>
         <% } %>
-      </td>
-      <td>
-        <% payments[index].banks.forEach(element => { %>
-        <span class="badge badge-warning"
-          ><%= element.name %> - <%= element.nameBank %> - <%=
-          element.noRekening%></span
-        >
-        <% }) %>
-      </td>
-      <td>
-        <form
-          method="post"
-          action="/payment/<%= payments[index]._id %>?method=PUT"
-          style="display: inline-block"
-        >
-          <input
-            type="hidden"
-            name="status"
-            value="<% if (payments[index].status === 'Y') { %>N<% } else{ %>Y<% } %>"
-          />
-          <button class="btn btn-danger btn-sm">
-            <i class="fas fa-folder">
-              <% if (payments[index].status === 'Y') { %> Belum Lunas <% } else
-              { %> Lunas <% } %>
-            </i>
-          </button>
-        </form>
-        <form
-          style="display: inline-block"
-          method="post"
-          action="/payment/<%= payments[index]._id %>?method=DELETE"
-        >
-          <a
-            href="/payment/<%= payments[index]._id %>/edit"
-            class="btn btn-info btn-sm"
-          >
-            <i class="fas fa-pencil-alt"> Edit</i>
-          </a>
-          <button class="btn btn-danger btn-sm">
-            <i class="fas fa-trash"> Hapus</i>
-          </button>
-        </form>
-      </td>
-    </tr>
-    <% } %>
-  </tbody>
+    </tbody>
 </table>
