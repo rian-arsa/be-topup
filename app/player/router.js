@@ -11,7 +11,7 @@ const {
     profile,
     editProfile,
 } = require('./controller');
-const { isLoginPlayer } = require('../../middleware/auth');
+const { isLoginPlayer } = require('../../middleware/Auth');
 const multer = require('multer');
 const os = require('os');
 
