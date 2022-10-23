@@ -11,4 +11,5 @@ module.exports = {
     mongoPassword: process.env.MONGO_PASSWORD,
 
     rootPath: path.resolve(__dirname, '..'),
+    jwtKey: process.env.SECRET,
 };

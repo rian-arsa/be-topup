@@ -6,6 +6,7 @@ const logger = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
+const cors = require('cors');
 
 const dashboardRouter = require('./app/dashboard/router');
 const categoryRouter = require('./app/category/router');
@@ -15,8 +16,13 @@ const bankRouter = require('./app/bank/router');
 const paymentRouter = require('./app/payment/router');
 const userRouter = require('./app/user/router');
 const transactionRouter = require('./app/transaction/router');
+const playerRouter = require('./app/player/router');
+const authRouter = require('./app/auth/router');
 
 const app = express();
+
+const URL = '/api/v1';
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +47,10 @@ app.use(
     '/adminlte',
     express.static(path.join(__dirname, 'node_modules/admin-lte/')),
 );
+
+// API
+app.use(`${URL}/player`, playerRouter);
+app.use(`${URL}/auth`, authRouter);
 
 app.use('/', userRouter);
 app.use('/', dashboardRouter);
